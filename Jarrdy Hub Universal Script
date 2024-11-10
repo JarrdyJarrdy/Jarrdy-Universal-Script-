@@ -1,0 +1,617 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Jarrdy Universal Script",
+   LoadingTitle = "JarrdyHub",
+   LoadingSubtitle = "by Jarryd",
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "JarrdyHub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "BswHpRQ9p8", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/BswHpRQ9p8 would be BswHpRQ9p8
+      RememberJoins = false -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Jarrdy Universal Script| Key",
+      Subtitle = "Key on my discord",
+      Note = "discord.gg/BswHpRQ9p8",
+      FileName = "AHHHHHHHH", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"JarrdyJarrdy"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
+local MainSectionSection = MainTab:CreateSection("Main")
+Rayfield:Notify({
+   Title = "Welcome!1!1!1!",
+   Content = "Script made by Jarryd!!",
+   Duration = 5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+     Ignore = { -- Duplicate this table (or remove it) to add and remove buttons to the notification.
+         Name = "Okay!",
+         Callback = function()
+            print("The user tapped Okay!")
+         end
+      },
+},
+})
+local Button = MainTab:CreateButton({
+   Name = "Inf Jump",
+   Callback = function()
+            local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+   end,
+})
+
+local Slider = MainTab:CreateSlider({
+   Name = "WalkSpeed",
+   Range = {0, 300},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 16,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+   end,
+})
+
+local Slider = MainTab:CreateSlider({
+   Name = "Jump Power",
+   Range = {0, 1000},
+   Increment = 1,
+   Suffix = "Jump",
+   CurrentValue = 50,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Noclip",
+   Callback = function()
+        local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+noclip() -- to toggle noclip() and clip()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Fly",
+   Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/YSL3xKYU'))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Esp",
+   Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Open Xray",
+   Callback = function()    
+        for i, descendant in pairs(workspace:GetDescendants()) do
+				if descendant:IsA("BasePart") then
+					if not descendant:FindFirstChild("OriginalTransparency") then
+						
+						local originalTransparency = Instance.new("NumberValue")
+						originalTransparency.Name = "OriginalTransparency"
+						originalTransparency.Value = descendant.Transparency
+						originalTransparency.Parent = descendant
+					end
+					descendant.Transparency = 0.7
+					end
+end  
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Off Xray",
+   Callback = function()
+        for i, descendant in pairs(workspace:GetDescendants()) do
+				if descendant:IsA("BasePart") then
+					if not descendant:FindFirstChild("OriginalTransparency") then
+						
+						local originalTransparency = Instance.new("NumberValue")
+						originalTransparency.Name = "OriginalTransparency"
+						originalTransparency.Value = descendant.Transparency
+						originalTransparency.Parent = descendant
+					end
+					descendant.Transparency = descendant.OriginalTransparency.Value
+					end
+end
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Fullbright (Recommended on horror games)",
+   Callback = function()
+        if not _G.FullBrightExecuted then
+
+	_G.FullBrightEnabled = false
+
+	_G.NormalLightingSettings = {
+		Brightness = game:GetService("Lighting").Brightness,
+		ClockTime = game:GetService("Lighting").ClockTime,
+		FogEnd = game:GetService("Lighting").FogEnd,
+		GlobalShadows = game:GetService("Lighting").GlobalShadows,
+		Ambient = game:GetService("Lighting").Ambient
+	}
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("Brightness"):Connect(function()
+		if game:GetService("Lighting").Brightness ~= 1 and game:GetService("Lighting").Brightness ~= _G.NormalLightingSettings.Brightness then
+			_G.NormalLightingSettings.Brightness = game:GetService("Lighting").Brightness
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").Brightness = 1
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("ClockTime"):Connect(function()
+		if game:GetService("Lighting").ClockTime ~= 12 and game:GetService("Lighting").ClockTime ~= _G.NormalLightingSettings.ClockTime then
+			_G.NormalLightingSettings.ClockTime = game:GetService("Lighting").ClockTime
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").ClockTime = 12
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("FogEnd"):Connect(function()
+		if game:GetService("Lighting").FogEnd ~= 786543 and game:GetService("Lighting").FogEnd ~= _G.NormalLightingSettings.FogEnd then
+			_G.NormalLightingSettings.FogEnd = game:GetService("Lighting").FogEnd
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").FogEnd = 786543
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("GlobalShadows"):Connect(function()
+		if game:GetService("Lighting").GlobalShadows ~= false and game:GetService("Lighting").GlobalShadows ~= _G.NormalLightingSettings.GlobalShadows then
+			_G.NormalLightingSettings.GlobalShadows = game:GetService("Lighting").GlobalShadows
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").GlobalShadows = false
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("Ambient"):Connect(function()
+		if game:GetService("Lighting").Ambient ~= Color3.fromRGB(178, 178, 178) and game:GetService("Lighting").Ambient ~= _G.NormalLightingSettings.Ambient then
+			_G.NormalLightingSettings.Ambient = game:GetService("Lighting").Ambient
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+		end
+	end)
+
+	game:GetService("Lighting").Brightness = 1
+	game:GetService("Lighting").ClockTime = 12
+	game:GetService("Lighting").FogEnd = 786543
+	game:GetService("Lighting").GlobalShadows = false
+	game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+
+	local LatestValue = true
+	spawn(function()
+		repeat
+			wait()
+		until _G.FullBrightEnabled
+		while wait() do
+			if _G.FullBrightEnabled ~= LatestValue then
+				if not _G.FullBrightEnabled then
+					game:GetService("Lighting").Brightness = _G.NormalLightingSettings.Brightness
+					game:GetService("Lighting").ClockTime = _G.NormalLightingSettings.ClockTime
+					game:GetService("Lighting").FogEnd = _G.NormalLightingSettings.FogEnd
+					game:GetService("Lighting").GlobalShadows = _G.NormalLightingSettings.GlobalShadows
+					game:GetService("Lighting").Ambient = _G.NormalLightingSettings.Ambient
+				else
+					game:GetService("Lighting").Brightness = 1
+					game:GetService("Lighting").ClockTime = 12
+					game:GetService("Lighting").FogEnd = 786543
+					game:GetService("Lighting").GlobalShadows = false
+					game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+				end
+				LatestValue = not LatestValue
+			end
+		end
+	end)
+end
+
+_G.FullBrightExecuted = true
+_G.FullBrightEnabled = not _G.FullBrightEnabled
+   end,
+})
+
+local Button =MainTab:CreateButton({
+   Name = "God Mode",
+   Callback = function()
+        local player = game.Players.LocalPlayer
+	if player.Character then
+		if player.Character:FindFirstChild("Humanoid") then
+			player.Character.Humanoid.Name = "1"
+		end
+		local l = player.Character["1"]:Clone()
+		l.Parent = player.Character
+		l.Name = "Humanoid"; wait(0.1)
+		player.Character["1"]:Destroy()
+		workspace.CurrentCamera.CameraSubject = player.Character.Humanoid
+		player.Character.Animate.Disabled = true; wait(0.1)
+		player.Character.Animate.Disabled = false
+            end
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Sit",
+   Callback = function()
+        local g = game
+local plrs = g:GetService("Players")
+local lp = plrs.LocalPlayer
+
+local c = lp.Character
+
+if c and c.Parent then
+local hum = c:FindFirstChildOfClass("Humanoid")
+
+if hum then
+hum.Sit = not hum.Sit
+end
+            end  
+   end,
+})local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+
+local Window = Rayfield:CreateWindow({
+   Name = "Jarrdy Universal Script",
+   LoadingTitle = "JarrdyHub",
+   LoadingSubtitle = "by Jarryd",
+   ConfigurationSaving = {
+      Enabled = false,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "JarrdyHub"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "BswHpRQ9p8", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/BswHpRQ9p8 would be BswHpRQ9p8
+      RememberJoins = false -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = true, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Jarrdy Universal Script| Key",
+      Subtitle = "Key on my discord",
+      Note = "discord.gg/BswHpRQ9p8",
+      FileName = "AHHHHHHHH", -- It is recommended to use something unique as other scripts using Rayfield may overwrite your key file
+      SaveKey = false, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+      Key = {"JarrdyJarrdy"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+local MainTab = Window:CreateTab("🏠 Home", nil) -- Title, Image
+local MainSectionSection = MainTab:CreateSection("Main")
+Rayfield:Notify({
+   Title = "Welcome!1!1!1!",
+   Content = "Script made by Jarryd!!",
+   Duration = 5,
+   Image = nil,
+   Actions = { -- Notification Buttons
+     Ignore = { -- Duplicate this table (or remove it) to add and remove buttons to the notification.
+         Name = "Okay!",
+         Callback = function()
+            print("The user tapped Okay!")
+         end
+      },
+},
+})
+local Button = MainTab:CreateButton({
+   Name = "Inf Jump",
+   Callback = function()
+            local InfiniteJumpEnabled = true
+game:GetService("UserInputService").JumpRequest:connect(function()
+	if InfiniteJumpEnabled then
+		game:GetService"Players".LocalPlayer.Character:FindFirstChildOfClass'Humanoid':ChangeState("Jumping")
+	end
+end)
+   end,
+})
+
+local Slider = MainTab:CreateSlider({
+   Name = "WalkSpeed",
+   Range = {0, 300},
+   Increment = 1,
+   Suffix = "Speed",
+   CurrentValue = 16,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = (Value)
+   end,
+})
+
+local Slider = MainTab:CreateSlider({
+   Name = "Jump Power",
+   Range = {0, 1000},
+   Increment = 1,
+   Suffix = "Jump",
+   CurrentValue = 50,
+   Flag = "Slider1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = (Value)
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Noclip",
+   Callback = function()
+        local Noclip = nil
+local Clip = nil
+
+function noclip()
+	Clip = false
+	local function Nocl()
+		if Clip == false and game.Players.LocalPlayer.Character ~= nil then
+			for _,v in pairs(game.Players.LocalPlayer.Character:GetDescendants()) do
+				if v:IsA('BasePart') and v.CanCollide and v.Name ~= floatName then
+					v.CanCollide = false
+				end
+			end
+		end
+		wait(0.21) -- basic optimization
+	end
+	Noclip = game:GetService('RunService').Stepped:Connect(Nocl)
+end
+
+function clip()
+	if Noclip then Noclip:Disconnect() end
+	Clip = true
+end
+
+noclip() -- to toggle noclip() and clip()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Fly",
+   Callback = function()
+        loadstring(game:HttpGet('https://pastebin.com/raw/YSL3xKYU'))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Esp",
+   Callback = function()
+        loadstring(game:HttpGet('https://raw.githubusercontent.com/Lucasfin000/SpaceHub/main/UESP'))()
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Open Xray",
+   Callback = function()    
+        for i, descendant in pairs(workspace:GetDescendants()) do
+				if descendant:IsA("BasePart") then
+					if not descendant:FindFirstChild("OriginalTransparency") then
+						
+						local originalTransparency = Instance.new("NumberValue")
+						originalTransparency.Name = "OriginalTransparency"
+						originalTransparency.Value = descendant.Transparency
+						originalTransparency.Parent = descendant
+					end
+					descendant.Transparency = 0.7
+					end
+end  
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Off Xray",
+   Callback = function()
+        for i, descendant in pairs(workspace:GetDescendants()) do
+				if descendant:IsA("BasePart") then
+					if not descendant:FindFirstChild("OriginalTransparency") then
+						
+						local originalTransparency = Instance.new("NumberValue")
+						originalTransparency.Name = "OriginalTransparency"
+						originalTransparency.Value = descendant.Transparency
+						originalTransparency.Parent = descendant
+					end
+					descendant.Transparency = descendant.OriginalTransparency.Value
+					end
+end
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Fullbright (Recommended on horror games)",
+   Callback = function()
+        if not _G.FullBrightExecuted then
+
+	_G.FullBrightEnabled = false
+
+	_G.NormalLightingSettings = {
+		Brightness = game:GetService("Lighting").Brightness,
+		ClockTime = game:GetService("Lighting").ClockTime,
+		FogEnd = game:GetService("Lighting").FogEnd,
+		GlobalShadows = game:GetService("Lighting").GlobalShadows,
+		Ambient = game:GetService("Lighting").Ambient
+	}
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("Brightness"):Connect(function()
+		if game:GetService("Lighting").Brightness ~= 1 and game:GetService("Lighting").Brightness ~= _G.NormalLightingSettings.Brightness then
+			_G.NormalLightingSettings.Brightness = game:GetService("Lighting").Brightness
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").Brightness = 1
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("ClockTime"):Connect(function()
+		if game:GetService("Lighting").ClockTime ~= 12 and game:GetService("Lighting").ClockTime ~= _G.NormalLightingSettings.ClockTime then
+			_G.NormalLightingSettings.ClockTime = game:GetService("Lighting").ClockTime
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").ClockTime = 12
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("FogEnd"):Connect(function()
+		if game:GetService("Lighting").FogEnd ~= 786543 and game:GetService("Lighting").FogEnd ~= _G.NormalLightingSettings.FogEnd then
+			_G.NormalLightingSettings.FogEnd = game:GetService("Lighting").FogEnd
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").FogEnd = 786543
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("GlobalShadows"):Connect(function()
+		if game:GetService("Lighting").GlobalShadows ~= false and game:GetService("Lighting").GlobalShadows ~= _G.NormalLightingSettings.GlobalShadows then
+			_G.NormalLightingSettings.GlobalShadows = game:GetService("Lighting").GlobalShadows
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").GlobalShadows = false
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("Ambient"):Connect(function()
+		if game:GetService("Lighting").Ambient ~= Color3.fromRGB(178, 178, 178) and game:GetService("Lighting").Ambient ~= _G.NormalLightingSettings.Ambient then
+			_G.NormalLightingSettings.Ambient = game:GetService("Lighting").Ambient
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+		end
+	end)
+
+	game:GetService("Lighting").Brightness = 1
+	game:GetService("Lighting").ClockTime = 12
+	game:GetService("Lighting").FogEnd = 786543
+	game:GetService("Lighting").GlobalShadows = false
+	game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+
+	local LatestValue = true
+	spawn(function()
+		repeat
+			wait()
+		until _G.FullBrightEnabled
+		while wait() do
+			if _G.FullBrightEnabled ~= LatestValue then
+				if not _G.FullBrightEnabled then
+					game:GetService("Lighting").Brightness = _G.NormalLightingSettings.Brightness
+					game:GetService("Lighting").ClockTime = _G.NormalLightingSettings.ClockTime
+					game:GetService("Lighting").FogEnd = _G.NormalLightingSettings.FogEnd
+					game:GetService("Lighting").GlobalShadows = _G.NormalLightingSettings.GlobalShadows
+					game:GetService("Lighting").Ambient = _G.NormalLightingSettings.Ambient
+				else
+					game:GetService("Lighting").Brightness = 1
+					game:GetService("Lighting").ClockTime = 12
+					game:GetService("Lighting").FogEnd = 786543
+					game:GetService("Lighting").GlobalShadows = false
+					game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+				end
+				LatestValue = not LatestValue
+			end
+		end
+	end)
+end
+
+_G.FullBrightExecuted = true
+_G.FullBrightEnabled = not _G.FullBrightEnabled
+   end,
+})
+
+local Button =MainTab:CreateButton({
+   Name = "God Mode",
+   Callback = function()
+        local player = game.Players.LocalPlayer
+	if player.Character then
+		if player.Character:FindFirstChild("Humanoid") then
+			player.Character.Humanoid.Name = "1"
+		end
+		local l = player.Character["1"]:Clone()
+		l.Parent = player.Character
+		l.Name = "Humanoid"; wait(0.1)
+		player.Character["1"]:Destroy()
+		workspace.CurrentCamera.CameraSubject = player.Character.Humanoid
+		player.Character.Animate.Disabled = true; wait(0.1)
+		player.Character.Animate.Disabled = false
+            end
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Sit",
+   Callback = function()
+        local g = game
+local plrs = g:GetService("Players")
+local lp = plrs.LocalPlayer
+
+local c = lp.Character
+
+if c and c.Parent then
+local hum = c:FindFirstChildOfClass("Humanoid")
+
+if hum then
+hum.Sit = not hum.Sit
+end
+            end  
+   end,
+})
